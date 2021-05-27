@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'constants.dart';
+import '../constants.dart';
 import 'dataTest.dart';
 import 'detail_page.dart';
 
@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Positioned(
                             right: 24,
-                            bottom: 60,
+                            bottom: 53,
                             child: Text(
                               planets[index].position.toString(),
                               style: TextStyle(
