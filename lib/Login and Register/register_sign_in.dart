@@ -1,3 +1,4 @@
+import 'package:ddd/AdminHomePage/home_page_admin.dart';
 import 'package:flutter/material.dart';
 
 import 'register_sign_up.dart';
@@ -62,7 +63,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return HomePageAdmin();
+                    }));
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: const Color(0xFF2962FF),
                   ),

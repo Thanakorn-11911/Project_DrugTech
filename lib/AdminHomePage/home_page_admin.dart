@@ -1,35 +1,27 @@
 import 'dart:io';
 
+import 'package:ddd/AdminHomePage/add_data_screen.dart';
+import 'package:ddd/UserHomePage/dataTest.dart';
+import 'package:ddd/UserHomePage/detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import '../constants.dart';
-import 'dataTest.dart';
-import 'detail_page.dart';
 import 'package:image_picker/image_picker.dart';
 
-class HomePage extends StatefulWidget {
+import '../constants.dart';
+
+class HomePageAdmin extends StatefulWidget {
+  HomePageAdmin({Key key}) : super(key: key);
+
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageAdminState createState() => _HomePageAdminState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageAdminState extends State<HomePageAdmin> {
   File _image;
   final picker = ImagePicker();
 
   Future getImagefromcamera() async {
     final pickedImage = await picker.getImage(source: ImageSource.camera);
-
-    setState(() {
-      if (pickedImage != null) {
-        _image = File(pickedImage.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
-
-  Future getImagefromgallery() async {
-    final pickedImage = await picker.getImage(source: ImageSource.gallery);
 
     setState(() {
       if (pickedImage != null) {
@@ -233,32 +225,15 @@ class _HomePageState extends State<HomePage> {
               ),
               onPressed: () {},
             ),
-            Positioned(
-              bottom: 20.0,
-              right: 20.0,
-              child: InkWell(
-                onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: IconButton(
-                    icon: Icon(Icons.camera),
-                    onPressed: getImagefromcamera,
-                  )));
-                },
-                child: Container(
-                  padding: EdgeInsets.all(12.0),
-                  child: Text('ddd'),
-                ),
+            IconButton(
+              icon: Icon(
+                Icons.camera,
+                color: Colors.white,
+                size: 32,
               ),
+              onPressed: getImagefromcamera,
+              tooltip: 'Pick Image',
             ),
-            // IconButton(
-            //   icon: Icon(
-            //     Icons.camera,
-            //     color: Colors.white,
-            //     size: 32,
-            //   ),
-            //   onPressed: getImagefromcamera,
-            //   tooltip: 'Pick Image',
-            // ),
             IconButton(
               icon: Icon(
                 Icons.search,
@@ -266,6 +241,18 @@ class _HomePageState extends State<HomePage> {
                 size: 32,
               ),
               onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 32,
+              ),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return AddDataScreen();
+                }));
+              },
             ),
           ],
         ),

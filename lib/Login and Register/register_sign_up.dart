@@ -14,6 +14,24 @@ class _RegisterSignUpScreenState extends State<RegisterSignUpScreen> {
         child: Column(
           children: [
             Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_rounded,
+                        color: const Color(0xFF2962FF),
+                      ),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return RegisterScreen();
+                        }));
+                      })
+                ],
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(32),
               child: Container(
                 width: 200.0,

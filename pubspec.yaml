@@ -30,6 +30,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_launcher_icons: ^0.9.0
+  image_picker: ^0.7.5+3
 
 
 flutter_icons:
@@ -52,7 +53,9 @@ flutter:
   uses-material-design: true
 
   assets:
+      - images/shape/
       - images/
+      - assets/
   # To add assets to your application, add an assets section, like this:
   #assets:
   #  - assets/images/
