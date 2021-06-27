@@ -1,6 +1,7 @@
 import 'package:ddd/screens/Admin/statusAuth.dart';
 
 import 'package:ddd/screens/User/homeUser.dart';
+import 'package:ddd/services/constants.dart';
 
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: gradientEndColor,
+      backgroundColor: cardColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -29,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: const Color(0xFF2962FF),
+                    primary: navigationColor,
                   ),
                   onPressed: () {
                     Navigator.push(context,
@@ -51,7 +52,10 @@ class HomeScreen extends StatelessWidget {
                 return StatusAuth();
               }));
             },
-            child: const Text('Admin'),
+            child: const Text(
+              'Admin',
+              style: TextStyle(color: Color(0xFF1B5E20)),
+            ),
           ),
         ],
       ),

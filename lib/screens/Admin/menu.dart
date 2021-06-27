@@ -45,7 +45,10 @@ class _MenuState extends State<Menu> {
                       top: 38,
                       left: 13,
                       child: IconButton(
-                        icon: Icon(Icons.camera_alt),
+                        icon: Icon(
+                          Icons.camera_alt,
+                          color: Colors.white,
+                        ),
                         onPressed: () async {
                           final data = await showModalBottomSheet(
                               context: context,

@@ -131,6 +131,7 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Card(
+                            color: cardColor,
                             clipBehavior: Clip.antiAlias,
                             elevation: 16,
                             shape: RoundedRectangleBorder(
@@ -264,7 +265,7 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                                         child: const Text(
                                           'Delete',
                                           style: TextStyle(
-                                              color: Color(0xFF2962FF)),
+                                              color: Color(0xFF1B5E20)),
                                         ),
                                       ),
                                       //Update
@@ -280,7 +281,7 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                                         child: const Text(
                                           'Edit',
                                           style: TextStyle(
-                                              color: Color(0xFF2962FF)),
+                                              color: Color(0xFF1B5E20)),
                                         ),
                                       ),
                                     ],
@@ -302,7 +303,7 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(36.0),
                 ),
-                color: gradientStartColor,
+                color: navigationColor,
               ),
               padding: const EdgeInsets.all(24),
               child: Row(

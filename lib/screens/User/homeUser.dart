@@ -34,8 +34,20 @@ class _HomeUserPageState extends State<HomeUserPage> {
     return Scaffold(
       key: key,
       appBar: AppBar(
-        title: Text('Drug Tech'),
-        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "images/01.png",
+              fit: BoxFit.contain,
+              height: 45,
+            ),
+            Container(
+              padding: EdgeInsets.all(8.0),
+              child: Text("Drug Tech"),
+            )
+          ],
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: drugscol.snapshots(),
@@ -49,6 +61,7 @@ class _HomeUserPageState extends State<HomeUserPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Card(
+                      color: cardColor,
                       clipBehavior: Clip.antiAlias,
                       elevation: 16,
                       shape: RoundedRectangleBorder(
@@ -133,7 +146,7 @@ class _HomeUserPageState extends State<HomeUserPage> {
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(36.0),
           ),
-          color: gradientStartColor,
+          color: navigationColor,
         ),
         padding: const EdgeInsets.all(24),
         child: Row(

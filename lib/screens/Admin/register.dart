@@ -19,6 +19,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: cardColor,
       appBar: AppBar(
         title: Text('Sign Up'),
         centerTitle: true,
@@ -115,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: const Color(0xFF2962FF),
+                      primary: navigationColor,
                     ),
                     onPressed: () async {
                       if (formkey.currentState.validate()) {

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ddd/Model/drug.dart';
 import 'package:ddd/screens/Admin/detail.dart';
+import 'package:ddd/services/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
@@ -74,6 +75,7 @@ class _TFLITEPageState extends State<TFLITEPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: cardColor,
       appBar: AppBar(
         title: Text("Image Classification"),
         centerTitle: true,
@@ -120,16 +122,22 @@ class _TFLITEPageState extends State<TFLITEPage> {
                                           ? dataList.first
                                           : null)));
                         },
-                        child: Text("more detail"));
+                        child: Text(
+                          "more detail",
+                          style: TextStyle(color: Color(0xFF1B5E20)),
+                        ));
                   }),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFF1B5E20),
         onPressed: () {
           getImageGallery();
         },
-        child: Icon(Icons.photo_album),
+        child: Icon(
+          Icons.photo_album,
+        ),
       ),
     );
   }

@@ -21,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: cardColor,
       appBar: AppBar(
         backgroundColor: navigationColor,
         title: Text('Login'),
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: const Color(0xFF2962FF),
+                      primary: navigationColor,
                     ),
                     child: const Text('Sign in'),
                   ),
@@ -149,7 +150,10 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (ctx) => RegisterPage()));
                       },
-                      child: const Text('Sign up'),
+                      child: const Text(
+                        'Sign up',
+                        style: TextStyle(color: Color(0xFF1B5E20)),
+                      ),
                     ),
                   ],
                 ),
