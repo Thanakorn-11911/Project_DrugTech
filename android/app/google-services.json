@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "981599859386",
+    "project_id": "drug-tech",
+    "storage_bucket": "drug-tech.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981599859386:android:31f8360699281eacab0883",
+        "android_client_info": {
+          "package_name": "com.example.ddd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981599859386-drveue37u788l029sa9uhu3gg8t0bdu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ6CDAmaQOGQxcqsJicAdqndU3BmDkC1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981599859386-drveue37u788l029sa9uhu3gg8t0bdu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

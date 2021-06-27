@@ -1,0 +1,20 @@
+0 1.Alzime
+1 2.Amloppine
+2 3.Anapril
+3 4.Bestatin
+4 5.Betalol
+5 6.Bestazol
+6 7.Cardiplot
+7 8.Caraten
+8 9.Chotalin
+9 10.Dilizem
+10 11.Soproxen
+11 12.Samarin
+12 13.Nelapine
+13 14.Prava
+14 15.Prenolol
+15 16.HiDil
+16 17.Monolin
+17 18.Fibril fenofibrate
+18 19.Berlontin
+19 20.Sopalol

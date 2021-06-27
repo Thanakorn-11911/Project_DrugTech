@@ -1,8 +1,8 @@
-import 'package:ddd/Login%20and%20Register/register_sign_in.dart';
-import 'package:ddd/UserHomePage/home_page.dart';
-import 'package:flutter/material.dart';
+import 'package:ddd/screens/Admin/statusAuth.dart';
 
-import '../constants.dart';
+import 'package:ddd/screens/User/homeUser.dart';
+
+import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return HomePage();
+                      return HomeUserPage();
                     }));
                   },
                   child: const Text('Get started'),
@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return RegisterScreen();
+                return StatusAuth();
               }));
             },
             child: const Text('Admin'),
