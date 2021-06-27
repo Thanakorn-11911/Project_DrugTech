@@ -4,8 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ddd/Model/drug.dart';
 import 'package:ddd/screens/Admin/detail.dart';
 import 'package:ddd/services/constants.dart';
+import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 import 'package:tflite/tflite.dart';
 
 class TFLITEPage extends StatefulWidget {
@@ -18,6 +20,7 @@ class TFLITEPage extends StatefulWidget {
 class _TFLITEPageState extends State<TFLITEPage> {
   final CollectionReference drugscol =
       FirebaseFirestore.instance.collection("drugs");
+
   File PickedImage;
   bool isImageLoaded = false;
 
@@ -25,6 +28,15 @@ class _TFLITEPageState extends State<TFLITEPage> {
 
   String _confidence = "";
   String _name = "";
+
+  getImageCamera() async {
+    var getImage = await ImagePicker().getImage(source: ImageSource.camera);
+    setState(() {
+      PickedImage = File(getImage.path);
+      isImageLoaded = true;
+    });
+    applyModelOnImage(PickedImage);
+  }
 
   getImageGallery() async {
     var tempStore = await ImagePicker().getImage(source: ImageSource.gallery);
@@ -130,13 +142,38 @@ class _TFLITEPageState extends State<TFLITEPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFF1B5E20),
-        onPressed: () {
-          getImageGallery();
-        },
-        child: Icon(
-          Icons.photo_album,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(36.0),
+          ),
+          color: navigationColor,
+        ),
+        padding: const EdgeInsets.all(24),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            FloatingActionButton(
+              backgroundColor: Colors.lightGreen.shade50,
+              onPressed: () {
+                getImageCamera();
+              },
+              child: Icon(
+                Icons.camera,
+                color: Colors.green.shade900,
+              ),
+            ),
+            FloatingActionButton(
+              backgroundColor: Colors.lightGreen.shade50,
+              onPressed: () {
+                getImageGallery();
+              },
+              child: Icon(
+                Icons.photo_album,
+                color: Colors.green.shade900,
+              ),
+            ),
+          ],
         ),
       ),
     );

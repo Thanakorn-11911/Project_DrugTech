@@ -41,6 +41,7 @@ dependencies:
   font_awesome_flutter: ^9.1.0
   path: ^1.8.0
   tflite: ^1.1.2
+  floating_action_bubble: ^1.1.2
   
   
   
