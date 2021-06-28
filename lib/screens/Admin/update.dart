@@ -279,7 +279,7 @@ class _UpdatePageState extends State<UpdatePage> {
         )),
         prefixIcon: Icon(
           Icons.person,
-          color: Color(0xFF2962FF),
+          color: Color(0xFF1B5E20),
         ),
         labelText: "Brand name",
         helperText: "Common Name can't be empty",
@@ -305,7 +305,7 @@ class _UpdatePageState extends State<UpdatePage> {
         )),
         prefixIcon: Icon(
           Icons.person,
-          color: Color(0xFF2962FF),
+          color: Color(0xFF1B5E20),
         ),
         labelText: "Generic name",
         helperText: "Product Name can't be empty",
@@ -407,7 +407,7 @@ class _UpdatePageState extends State<UpdatePage> {
         )),
         prefixIcon: Icon(
           Icons.person,
-          color: Color(0xFF2962FF),
+          color: Color(0xFF1B5E20),
         ),
         labelText: "Letter",
         helperText: "Letter can't be empty",
@@ -510,7 +510,7 @@ class _UpdatePageState extends State<UpdatePage> {
         )),
         prefixIcon: Icon(
           Icons.person,
-          color: Color(0xFF2962FF),
+          color: Color(0xFF1B5E20),
         ),
         labelText: "Benefit",
         helperText: "Benefit can't be empty",
