@@ -98,20 +98,39 @@ class _TFLITEPageState extends State<TFLITEPage> {
             SizedBox(
               height: 30,
             ),
+            if (PickedImage == null)
+              Container(
+                height: 350,
+                width: 350,
+                child: Card(
+                  color: Colors.lightGreen.shade100,
+                  child: Image.asset("assets/image.png"),
+                ),
+              ),
             isImageLoaded
                 ? Center(
                     child: Container(
-                      height: 350,
-                      width: 350,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: FileImage(File(PickedImage.path)),
-                            fit: BoxFit.contain),
+                      child: Card(
+                        child: Container(
+                          height: 350,
+                          width: 350,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: FileImage(File(PickedImage.path)),
+                                fit: BoxFit.fitWidth),
+                          ),
+                        ),
                       ),
                     ),
                   )
                 : Container(),
+            SizedBox(
+              height: 25,
+            ),
             Text("Name : $_name\nConfidence: $_confidence"),
+            SizedBox(
+              height: 25,
+            ),
             if (_name != null && _name.isNotEmpty)
               FutureBuilder<QuerySnapshot>(
                   future: drugscol.get(),
@@ -125,6 +144,7 @@ class _TFLITEPageState extends State<TFLITEPage> {
                         ?.where((d) =>
                             d.brandName.toLowerCase() ==
                             _name.trim().toLowerCase());
+
                     return TextButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(

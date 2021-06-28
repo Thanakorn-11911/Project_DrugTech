@@ -225,6 +225,12 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                                                                     .center,
                                                             children: <Widget>[
                                                               ElevatedButton(
+                                                                style: ElevatedButton
+                                                                    .styleFrom(
+                                                                  primary: Colors
+                                                                      .green
+                                                                      .shade900,
+                                                                ),
                                                                 onPressed:
                                                                     () async {
                                                                   loading(
@@ -253,7 +259,12 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                                                                       context);
                                                                 },
                                                                 child: Text(
-                                                                    'Cancel'),
+                                                                  'Cancel',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .green
+                                                                          .shade900),
+                                                                ),
                                                               ),
                                                             ],
                                                           )

@@ -83,6 +83,7 @@ class _UpdatePageState extends State<UpdatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: cardColor,
       appBar: AppBar(
         title: Text("Update" + "\t" + widget.data.brandName),
         centerTitle: true,

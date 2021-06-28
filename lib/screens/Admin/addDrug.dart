@@ -91,6 +91,7 @@ class _AddDrugState extends State<AddDrug> {
       backgroundColor: cardColor,
       appBar: AppBar(
         title: Text("Add drug"),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Container(

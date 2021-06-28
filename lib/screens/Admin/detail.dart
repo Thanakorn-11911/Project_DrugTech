@@ -1,4 +1,5 @@
 import 'package:ddd/Model/drug.dart';
+import 'package:ddd/services/constants.dart';
 import 'package:flutter/material.dart';
 
 class Detail extends StatefulWidget {
@@ -18,7 +19,9 @@ class _DetailState extends State<Detail> {
   Widget build(BuildContext context) {
     if (widget.test == null) {
       return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: Color(0xFF1B5E20),
+        ),
         body: Center(
           child: Text("not found!"),
         ),
@@ -86,7 +89,7 @@ class _DetailState extends State<Detail> {
                 ),
                 Container(
                   padding: const EdgeInsets.all(32.0),
-                  color: Colors.white,
+                  color: cardColor,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -100,7 +103,7 @@ class _DetailState extends State<Detail> {
                                 Text(
                                   widget.test.statusId ?? '',
                                   style: TextStyle(
-                                      color: Color(0xFF2962FF),
+                                      color: Color(0xFF1B5E20),
                                       fontFamily: 'Avenir',
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20.0),
@@ -130,7 +133,7 @@ class _DetailState extends State<Detail> {
                                 //"shape",
                                 widget.test.shapeId ?? '',
                                 style: TextStyle(
-                                    color: Color(0xFF2962FF),
+                                    color: Color(0xFF1B5E20),
                                     fontFamily: 'Avenir',
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20.0),
@@ -150,7 +153,7 @@ class _DetailState extends State<Detail> {
                       Text(
                         "Benefit".toUpperCase(),
                         style: TextStyle(
-                            color: Colors.blueAccent.shade100,
+                            color: Color(0xFF1B5E20),
                             fontFamily: 'Avenir',
                             fontWeight: FontWeight.w600,
                             fontSize: 14.0),
@@ -168,7 +171,7 @@ class _DetailState extends State<Detail> {
                       Text(
                         "Description".toUpperCase(),
                         style: TextStyle(
-                            color: Colors.blueAccent.shade100,
+                            color: Color(0xFF1B5E20),
                             fontFamily: 'Avenir',
                             fontWeight: FontWeight.w600,
                             fontSize: 14.0),
@@ -188,7 +191,7 @@ class _DetailState extends State<Detail> {
                         style: TextStyle(
                           fontFamily: 'Avenir',
                           fontSize: 25,
-                          color: Colors.blueAccent.shade100,
+                          color: Color(0xFF1B5E20),
                           fontWeight: FontWeight.w300,
                         ),
                         textAlign: TextAlign.left,
