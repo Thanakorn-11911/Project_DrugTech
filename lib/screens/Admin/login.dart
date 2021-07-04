@@ -92,7 +92,6 @@ class _LoginPageState extends State<LoginPage> {
                       if (formkey.currentState.validate()) {
                         loading(context);
                         bool login = await auth.signin(email, pass);
-                        print(login);
                         if (login != null) {
                           Navigator.of(context).pop();
                           Navigator.pushReplacement(context,

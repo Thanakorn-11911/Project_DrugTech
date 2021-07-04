@@ -18,3 +18,8 @@
 17 18.Fibril fenofibrate
 18 19.Berlontin
 19 20.Sopalol
+20 21.Paracetamol
+21 22.Moxy
+22 23.Dextromethorphan
+23 24.Dimophen
+24 25.CA-R-BON

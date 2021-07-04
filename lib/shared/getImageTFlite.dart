@@ -24,7 +24,7 @@ class _TFLITEPageState extends State<TFLITEPage> {
   File PickedImage;
   bool isImageLoaded = false;
 
-  List _result;
+  List _result = [];
 
   String _confidence = "";
   String _name = "";
@@ -52,13 +52,14 @@ class _TFLITEPageState extends State<TFLITEPage> {
     var res = await Tflite.runModelOnImage(
       path: file.path,
       numResults: 19,
-      threshold: 0.5,
-      imageMean: 127.5,
-      imageStd: 127.5,
+      threshold: 0.05,
+      // imageMean: 127.5,
+      // imageStd: 127.5,
+      // imageMean: 117,
+      // imageStd: 1,
     );
     setState(() {
       _result = res;
-      print(_result);
 
       String str = _result[0]['label'];
 
@@ -66,6 +67,10 @@ class _TFLITEPageState extends State<TFLITEPage> {
       _confidence = _result != null
           ? (_result[0]['confidence'] * 100.0).toString() + "%"
           : "";
+
+      print("Output:${_result}");
+      print(_confidence);
+      print(_name);
     });
   }
 
@@ -92,76 +97,160 @@ class _TFLITEPageState extends State<TFLITEPage> {
         title: Text("Image Classification"),
         centerTitle: true,
       ),
-      body: Container(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30,
+      body: Column(children: [
+        SizedBox(
+          height: 30,
+        ),
+        if (PickedImage == null)
+          Container(
+            height: 150,
+            width: 150,
+            child: Card(
+              color: Colors.lightGreen.shade100,
+              child: Image.asset("assets/image.png"),
             ),
-            if (PickedImage == null)
-              Container(
-                height: 350,
-                width: 350,
-                child: Card(
-                  color: Colors.lightGreen.shade100,
-                  child: Image.asset("assets/image.png"),
-                ),
-              ),
-            isImageLoaded
-                ? Center(
+          ),
+        isImageLoaded
+            ? Center(
+                child: Container(
+                  child: Card(
                     child: Container(
-                      child: Card(
-                        child: Container(
-                          height: 350,
-                          width: 350,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: FileImage(File(PickedImage.path)),
-                                fit: BoxFit.fitWidth),
-                          ),
-                        ),
+                      height: 150,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: FileImage(File(PickedImage.path)),
+                            fit: BoxFit.fitWidth),
                       ),
                     ),
-                  )
-                : Container(),
-            SizedBox(
-              height: 25,
-            ),
-            Text("Name : $_name\nConfidence: $_confidence"),
-            SizedBox(
-              height: 25,
-            ),
-            if (_name != null && _name.isNotEmpty)
-              FutureBuilder<QuerySnapshot>(
-                  future: drugscol.get(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done) {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                    final dataList = snapshot.data?.docs
-                        ?.map((d) =>
-                            Drugs.fromJson(d.data() as Map<String, dynamic>))
-                        ?.where((d) =>
-                            d.brandName.toLowerCase() ==
-                            _name.trim().toLowerCase());
+                  ),
+                ),
+              )
+            : Container(),
+        Expanded(
+          child: ListView.builder(
+              itemCount: _result.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    onTap: () {},
+                    title: Text(
+                        "Name : ${_result[index]['label'].split('.').last}\nConfidence: ${(_result[index]['confidence'] * 100.0).toString()} %"),
+                    subtitle: FutureBuilder<QuerySnapshot>(
+                        future: drugscol.get(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState !=
+                              ConnectionState.done) {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                          final dataList = snapshot.data?.docs
+                              ?.map((d) => Drugs.fromJson(
+                                  d.data() as Map<String, dynamic>))
+                              ?.where((d) =>
+                                  d.brandName.toLowerCase() ==
+                                  _result[index]['label']
+                                      .split('.')
+                                      .last
+                                      .trim()
+                                      .toLowerCase());
 
-                    return TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (ctx) => Detail(
-                                  test:
-                                      (dataList != null && dataList.isNotEmpty)
-                                          ? dataList.first
-                                          : null)));
-                        },
-                        child: Text(
-                          "more detail",
-                          style: TextStyle(color: Color(0xFF1B5E20)),
-                        ));
-                  }),
-          ],
+                          return TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (ctx) => Detail(
+                                        test: (dataList != null &&
+                                                dataList.isNotEmpty)
+                                            ? dataList.first
+                                            : null)));
+                              },
+                              child: Text(
+                                "more detail",
+                                style: TextStyle(color: Color(0xFF1B5E20)),
+                              ));
+                        }),
+                  ),
+                );
+              }),
         ),
-      ),
+      ]),
+
+      // body: Container(
+      //   child: ListView(
+      //     children: [
+      //       Column(
+      //         children: [
+      //           SizedBox(
+      //             height: 30,
+      //           ),
+      //           if (PickedImage == null)
+      //             Container(
+      //               height: 350,
+      //               width: 350,
+      //               child: Card(
+      //                 color: Colors.lightGreen.shade100,
+      //                 child: Image.asset("assets/image.png"),
+      //               ),
+      //             ),
+      //           isImageLoaded
+      //               ? Center(
+      //                   child: Container(
+      //                     child: Card(
+      //                       child: Container(
+      //                         height: 350,
+      //                         width: 350,
+      //                         decoration: BoxDecoration(
+      //                           image: DecorationImage(
+      //                               image: FileImage(File(PickedImage.path)),
+      //                               fit: BoxFit.fitWidth),
+      //                         ),
+      //                       ),
+      //                     ),
+      //                   ),
+      //                 )
+      //               : Container(),
+      //           SizedBox(
+      //             height: 25,
+      //           ),
+      //           Text("Name : $_name\nConfidence: $_confidence"),
+      //           SizedBox(
+      //             height: 25,
+      //           ),
+      //           if (_name != null && _name.isNotEmpty)
+      //             FutureBuilder<QuerySnapshot>(
+      //                 future: drugscol.get(),
+      //                 builder: (context, snapshot) {
+      //                   if (snapshot.connectionState != ConnectionState.done) {
+      //                     return Center(child: CircularProgressIndicator());
+      //                   }
+      //                   final dataList = snapshot.data?.docs
+      //                       ?.map((d) => Drugs.fromJson(
+      //                           d.data() as Map<String, dynamic>))
+      //                       ?.where((d) =>
+      //                           d.brandName.toLowerCase() ==
+      //                           _name.trim().toLowerCase());
+
+      //                   return TextButton(
+      //                       onPressed: () {
+      //                         Navigator.of(context).push(MaterialPageRoute(
+      //                             builder: (ctx) => Detail(
+      //                                 test: (dataList != null &&
+      //                                         dataList.isNotEmpty)
+      //                                     ? dataList.first
+      //                                     : null)));
+      //                       },
+      //                       child: Text(
+      //                         "more detail",
+      //                         style: TextStyle(color: Color(0xFF1B5E20)),
+      //                       ));
+      //                 }),
+      //           SizedBox(
+      //             height: 50,
+      //           )
+      //         ],
+      //       ),
+      //     ],
+      //   ),
+      // ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(
@@ -199,3 +288,82 @@ class _TFLITEPageState extends State<TFLITEPage> {
     );
   }
 }
+
+
+  // body: Container(
+  //       child: ListView(
+  //         children: [
+  //           Column(
+  //             children: [
+  //               SizedBox(
+  //                 height: 30,
+  //               ),
+  //               if (PickedImage == null)
+  //                 Container(
+  //                   height: 350,
+  //                   width: 350,
+  //                   child: Card(
+  //                     color: Colors.lightGreen.shade100,
+  //                     child: Image.asset("assets/image.png"),
+  //                   ),
+  //                 ),
+  //               isImageLoaded
+  //                   ? Center(
+  //                       child: Container(
+  //                         child: Card(
+  //                           child: Container(
+  //                             height: 350,
+  //                             width: 350,
+  //                             decoration: BoxDecoration(
+  //                               image: DecorationImage(
+  //                                   image: FileImage(File(PickedImage.path)),
+  //                                   fit: BoxFit.fitWidth),
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ),
+  //                     )
+  //                   : Container(),
+  //               SizedBox(
+  //                 height: 25,
+  //               ),
+  //               Text("Name : $_name\nConfidence: $_confidence"),
+  //               SizedBox(
+  //                 height: 25,
+  //               ),
+  //               if (_name != null && _name.isNotEmpty)
+  //                 FutureBuilder<QuerySnapshot>(
+  //                     future: drugscol.get(),
+  //                     builder: (context, snapshot) {
+  //                       if (snapshot.connectionState != ConnectionState.done) {
+  //                         return Center(child: CircularProgressIndicator());
+  //                       }
+  //                       final dataList = snapshot.data?.docs
+  //                           ?.map((d) => Drugs.fromJson(
+  //                               d.data() as Map<String, dynamic>))
+  //                           ?.where((d) =>
+  //                               d.brandName.toLowerCase() ==
+  //                               _name.trim().toLowerCase());
+
+  //                       return TextButton(
+  //                           onPressed: () {
+  //                             Navigator.of(context).push(MaterialPageRoute(
+  //                                 builder: (ctx) => Detail(
+  //                                     test: (dataList != null &&
+  //                                             dataList.isNotEmpty)
+  //                                         ? dataList.first
+  //                                         : null)));
+  //                           },
+  //                           child: Text(
+  //                             "more detail",
+  //                             style: TextStyle(color: Color(0xFF1B5E20)),
+  //                           ));
+  //                     }),
+  //               SizedBox(
+  //                 height: 50,
+  //               )
+  //             ],
+  //           ),
+  //         ],
+  //       ),
+  //     ),
