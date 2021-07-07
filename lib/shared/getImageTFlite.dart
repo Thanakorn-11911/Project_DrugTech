@@ -60,6 +60,7 @@ class _TFLITEPageState extends State<TFLITEPage> {
     );
     setState(() {
       _result = res;
+      //.where((e) => (e['confidence'] * 100.0) >= 60.0).toList()
 
       String str = _result[0]['label'];
 
@@ -127,51 +128,54 @@ class _TFLITEPageState extends State<TFLITEPage> {
                 ),
               )
             : Container(),
-        Expanded(
-          child: ListView.builder(
-              itemCount: _result.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    onTap: () {},
-                    title: Text(
-                        "Name : ${_result[index]['label'].split('.').last}\nConfidence: ${(_result[index]['confidence'] * 100.0).toString()} %"),
-                    subtitle: FutureBuilder<QuerySnapshot>(
-                        future: drugscol.get(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState !=
-                              ConnectionState.done) {
-                            return Center(child: CircularProgressIndicator());
-                          }
-                          final dataList = snapshot.data?.docs
-                              ?.map((d) => Drugs.fromJson(
-                                  d.data() as Map<String, dynamic>))
-                              ?.where((d) =>
-                                  d.brandName.toLowerCase() ==
-                                  _result[index]['label']
-                                      .split('.')
-                                      .last
-                                      .trim()
-                                      .toLowerCase());
+        if (_result.isNotEmpty)
+          Expanded(
+            child: ListView.builder(
+                itemCount: _result.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      onTap: () {},
+                      title: Text(
+                          "Name : ${_result[index]['label'].split('.').last}\nConfidence: ${(_result[index]['confidence'] * 100.0).toString()} %"),
+                      subtitle: FutureBuilder<QuerySnapshot>(
+                          future: drugscol.get(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState !=
+                                ConnectionState.done) {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                            final dataList = snapshot.data?.docs
+                                ?.map((d) => Drugs.fromJson(
+                                    d.data() as Map<String, dynamic>))
+                                ?.where((d) =>
+                                    d.brandName.toLowerCase() ==
+                                    _result[index]['label']
+                                        .split('.')
+                                        .last
+                                        .trim()
+                                        .toLowerCase());
 
-                          return TextButton(
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (ctx) => Detail(
-                                        test: (dataList != null &&
-                                                dataList.isNotEmpty)
-                                            ? dataList.first
-                                            : null)));
-                              },
-                              child: Text(
-                                "more detail",
-                                style: TextStyle(color: Color(0xFF1B5E20)),
-                              ));
-                        }),
-                  ),
-                );
-              }),
-        ),
+                            return TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (ctx) => Detail(
+                                          test: (dataList != null &&
+                                                  dataList.isNotEmpty)
+                                              ? dataList.first
+                                              : null)));
+                                },
+                                child: Text(
+                                  "more detail",
+                                  style: TextStyle(color: Color(0xFF1B5E20)),
+                                ));
+                          }),
+                    ),
+                  );
+                }),
+          )
+        else
+          Text("Not found"),
       ]),
 
       // body: Container(
