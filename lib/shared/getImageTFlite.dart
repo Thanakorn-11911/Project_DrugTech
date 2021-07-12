@@ -59,8 +59,8 @@ class _TFLITEPageState extends State<TFLITEPage> {
       // imageStd: 1,
     );
     setState(() {
-      _result = res;
-      //.where((e) => (e['confidence'] * 100.0) >= 60.0).toList()
+      _result = res.where((e) => (e['confidence'] * 100.0) >= 60.0).toList();
+      //
 
       String str = _result[0]['label'];
 
